@@ -15,4 +15,6 @@ python -m http.server 8080
 ## GitHub Pages
 
 След качване в GitHub: **Settings → Pages → Deploy from a branch → `main` / root**.
-Сайтът ще е на `https://<потребител>.github.io/krassimir-dimitrov/`.
+Сайтът ще е на `https://lukezester-ai.github.io/krassimir-dimitrov/`.
+
+Ако Pages все още не е активен: **Settings → Pages → Source: GitHub Actions**.

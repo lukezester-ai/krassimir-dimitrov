@@ -2,3 +2,7 @@
 Thumbs.db
 *.log
 _extract.py
+_extract_images.py
+_dump_body.py
+_body.txt
+

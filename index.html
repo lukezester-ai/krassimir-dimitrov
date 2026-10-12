@@ -13,8 +13,10 @@
 <meta property="og:title" content="Красимир Димитров — Кларинетист">
 <meta property="og:description" content="Кларинетист, магистър на НМА „Проф. Панчо Владигеров“. Биография, репертоар, концерти и контакти.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/01.jpg">
+<meta property="og:url" content="https://lukezester-ai.github.io/krassimir-dimitrov/">
+<meta property="og:image" content="https://lukezester-ai.github.io/krassimir-dimitrov/images/01.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lukezester-ai.github.io/krassimir-dimitrov/images/01.jpg">
 <link rel="canonical" href="https://lukezester-ai.github.io/krassimir-dimitrov/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,8 +127,12 @@
     }
     nav.links.open{transform:translateX(0);}
     nav.links a{color:var(--parchment); font-size:1.1rem;}
-    .burger{display:flex; z-index:102;}
+    .burger{
+      display:flex; z-index:102;
+      width:44px; height:44px; align-items:center; justify-content:center;
+    }
     nav.links{z-index:101;}
+    header.nav .links:not(.open){visibility:hidden;}
   }
   .nav-backdrop{display:none;}
   @media (max-width:860px){
@@ -224,7 +230,8 @@
     height:34px; margin:0 auto; width:min(320px,80%);
   }
   .waveform span{
-    flex:1; background:var(--brass); border-radius:1px;
+    flex:1; height:100%; transform-origin:bottom;
+    background:var(--brass); border-radius:1px;
     animation:breathe 2.6s ease-in-out infinite;
   }
   @keyframes breathe{
@@ -248,6 +255,9 @@
   /* ---------- reveal ---------- */
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
+  @media (scripting: none){
+    .reveal{opacity:1; transform:none;}
+  }
 
   /* ---------- BIO / TIMELINE ---------- */
   .bio-intro{max-width:64ch; font-size:1.08rem; color:var(--ink-soft); margin-bottom:3.2rem;}
@@ -351,6 +361,13 @@
     content:''; border-style:solid; border-width:8px 0 8px 13px;
     border-color:transparent transparent transparent var(--brass-light); margin-left:3px;
   }
+  .media-card.is-mail .play::after{
+    width:18px; height:13px; margin-left:0;
+    border:1.5px solid var(--brass-light); border-radius:2px;
+    background:
+      linear-gradient(to bottom right, transparent 46%, var(--brass-light) 47%, var(--brass-light) 53%, transparent 54%) left / 50% 70% no-repeat,
+      linear-gradient(to bottom left, transparent 46%, var(--brass-light) 47%, var(--brass-light) 53%, transparent 54%) right / 50% 70% no-repeat;
+  }
   .media-card small{font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase;}
 
   /* Gallery */
@@ -376,13 +393,23 @@
     pointer-events:none;
   }
 
-  /* Concerts empty state */
-  .empty-state{
-    border:1px dashed var(--brass); border-radius:4px; padding:3rem 2rem;
-    text-align:center; max-width:560px; margin:0 auto;
+  /* Concert poster */
+  .poster{max-width:460px; margin:0 auto;}
+  .poster-open{
+    display:block; width:100%; padding:0; border:1px solid rgba(27,22,19,0.22);
+    border-radius:3px; background:#e6d3ae; cursor:zoom-in; overflow:hidden;
+    box-shadow:0 16px 40px rgba(27,22,19,0.16);
   }
-  .empty-state h3{font-size:1.3rem; margin-bottom:0.6rem;}
-  .empty-state p{color:var(--ink-soft); max-width:44ch; margin:0 auto 1.6rem;}
+  .poster-open img{width:100%; height:auto;}
+  .poster figcaption{
+    margin-top:0.95rem; text-align:center; color:var(--ink-soft); font-size:0.95rem;
+  }
+  .poster figcaption strong{
+    display:block; color:var(--ink); font-family:'Fraunces', serif;
+    font-weight:500; font-size:1.15rem; margin-bottom:0.2rem;
+  }
+  .poster figcaption span{display:block; line-height:1.45;}
+  .poster-hint{margin-top:0.35rem; font-size:0.8rem; letter-spacing:0.02em;}
 
   /* Contact */
   .contact-wrap{
@@ -465,14 +492,20 @@
     }
     .hero h1{font-size:clamp(2.35rem, 12vw, 3.4rem);}
     .hero p.lede{font-size:0.98rem; margin-top:1.1rem;}
-    .hero-cta{margin-top:1.5rem; gap:0.7rem;}
+    .hero-cta{margin-top:1.5rem; gap:0.7rem; width:100%;}
     .hero-cta .btn{
-      flex:1 1 calc(50% - 0.4rem);
+      flex:1 1 100%;
       text-align:center;
       min-height:48px;
       display:inline-flex; align-items:center; justify-content:center;
       padding:0.85rem 1rem;
     }
+    .split{grid-template-columns:1fr; gap:1.4rem;}
+    .orch-grid{grid-template-columns:1fr;}
+    .media-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); gap:0.55rem;}
+    .contact-wrap{grid-template-columns:1fr; gap:1.8rem;}
+    .teach-card{grid-template-columns:1fr;}
     section{padding:3.2rem 1.1rem;}
     .section-divider{padding:1.6rem 0;}
     .bio-intro{font-size:1rem; margin-bottom:2rem;}
@@ -491,7 +524,7 @@
     .teach-card{padding:1.6rem 1.2rem; gap:1.4rem;}
     .media-card{aspect-ratio:16/11; min-height:180px;}
     .gallery-grid{gap:0.55rem;}
-    .empty-state{padding:2rem 1.2rem;}
+    .poster{max-width:100%;}
     .contact-info a{
       font-size:0.95rem;
       min-height:48px;
@@ -537,7 +570,7 @@
   </nav>
   <div class="nav-right">
     <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
-    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="navLinks">
+    <button class="burger" id="burger" aria-label="Меню" data-en-aria="Menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -736,7 +769,7 @@
       <div class="play"></div>
       <small data-en="Watch on YouTube">Гледай в YouTube</small>
     </a>
-    <a href="mailto:kdimitrov862@gmail.com" class="media-card">
+    <a href="mailto:kdimitrov862@gmail.com" class="media-card is-mail">
       <img src="images/03.jpg" alt="" loading="lazy">
       <div class="play"></div>
       <small data-en="Request a recording">Заявете запис</small>
@@ -768,10 +801,18 @@
 <section id="koncerti" class="reveal">
   <div class="eyebrow" data-en="Upcoming">Афиш</div>
   <h2 style="margin-bottom:2.2rem;" data-en="Upcoming Concerts">Предстоящи концерти</h2>
-  <div class="empty-state">
-    <h3 data-en="No concerts currently announced">Няма обявени концерти в момента</h3>
-    <p data-en="Check back on this page or follow social media for news about upcoming performances.">Следете тази страница или последвайте социалните мрежи за новини за предстоящи изяви.</p>
-  </div>
+  <figure class="poster">
+    <button type="button" class="poster-open">
+      <img src="images/koncert-2026-10-17.jpg" alt="Афиш за концерт на Яна Лолова и Красимир Димитров, със специалното участие на Никола Николов. Програма: Анри Рабо, Роберт Шуман, Камий Сен-Санс, Андре Месаже, Ернест Шосон, Франсис Пуленк. 17 октомври 2026 г., събота, 18:00, София, НМА, зала „Димитър Ненов“. Вход свободен." data-en-alt="Poster for a concert by Yana Lolova and Krassimir Dimitrov, with Nikola Nikolov. Programme: Henri Rabaud, Robert Schumann, Camille Saint-Saëns, André Messager, Ernest Chausson, Francis Poulenc. 17 October 2026, Saturday, 18:00, Sofia, National Academy of Music, Dimitar Nenov Hall. Free admission.">
+    </button>
+    <figcaption>
+      <strong data-en="Yana Lolova and Krassimir Dimitrov">Яна Лолова и Красимир Димитров</strong>
+      <span data-en="with Nikola Nikolov">със специалното участие на Никола Николов</span>
+      <span data-en="17 October 2026, Saturday, 18:00">17 октомври 2026, събота, 18:00</span>
+      <span data-en="NAM, Dimitar Nenov Hall, Sofia · free admission">НМА, зала „Димитър Ненов“, София · вход свободен</span>
+      <span class="poster-hint" data-en="Tap the poster to view it full size.">Натиснете афиша, за да го видите в пълен размер.</span>
+    </figcaption>
+  </figure>
 </section>
 
 <!-- CONTACT -->
@@ -781,13 +822,13 @@
   <div class="contact-wrap">
     <div class="contact-info">
       <a href="mailto:kdimitrov862@gmail.com">kdimitrov862@gmail.com</a>
-      <a href="tel:+359896835498">+359 89 683 5498</a>
+      <a href="tel:+359896835498">+359 896 835 498</a>
       <a href="https://www.youtube.com/@krasi765" target="_blank" rel="noopener">YouTube — @krasi765</a>
     </div>
     <form class="contact-form" id="contactForm">
-      <input type="text" placeholder="Име" data-en-ph="Name" required>
-      <input type="email" placeholder="Имейл" data-en-ph="Email" required>
-      <textarea placeholder="Съобщение" data-en-ph="Message" required></textarea>
+      <input type="text" name="name" autocomplete="name" placeholder="Име" data-en-ph="Name" aria-label="Име" data-en-aria="Name" required>
+      <input type="email" name="email" autocomplete="email" placeholder="Имейл" data-en-ph="Email" aria-label="Имейл" data-en-aria="Email" required>
+      <textarea name="message" placeholder="Съобщение" data-en-ph="Message" aria-label="Съобщение" data-en-aria="Message" required></textarea>
       <button type="submit" data-en="Send">Изпрати</button>
       <p class="form-status" id="formStatus" role="status"></p>
       <small style="color:var(--ink-soft); font-size:0.78rem;" data-en="Opens your email app with the message ready to send.">Отваря вашето имейл приложение с готово съобщение.</small>
@@ -800,8 +841,8 @@
   <span data-en="Clarinetist · © 2026">Кларинетист · © 2026</span>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Снимка">
-  <button type="button" id="lightboxClose" aria-label="Затвори">&times;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Снимка" data-en-aria="Photo">
+  <button type="button" id="lightboxClose" aria-label="Затвори" data-en-aria="Close">&times;</button>
   <img id="lightboxImg" alt="">
 </div>
 
@@ -828,13 +869,14 @@
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.querySelectorAll('.g-tile').forEach((tile) => {
+  document.querySelectorAll('.g-tile, .poster-open').forEach((tile) => {
     tile.addEventListener('click', () => {
       const img = tile.querySelector('img');
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.getElementById('lightboxClose').focus();
     });
   });
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
@@ -846,10 +888,15 @@
     }
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
 
   /* --- language toggle --- */
   const langBtn = document.getElementById('langToggle');
@@ -875,6 +922,14 @@
     document.querySelectorAll('[data-en-ph]').forEach(el => {
       if (el.dataset.bgPh === undefined) el.dataset.bgPh = el.getAttribute('placeholder');
       el.setAttribute('placeholder', lang === 'en' ? el.dataset.enPh : el.dataset.bgPh);
+    });
+    document.querySelectorAll('[data-en-aria]').forEach(el => {
+      if (el.dataset.bgAria === undefined) el.dataset.bgAria = el.getAttribute('aria-label') || '';
+      el.setAttribute('aria-label', lang === 'en' ? el.dataset.enAria : el.dataset.bgAria);
+    });
+    document.querySelectorAll('[data-en-alt]').forEach(el => {
+      if (el.dataset.bgAlt === undefined) el.dataset.bgAlt = el.getAttribute('alt') || '';
+      el.setAttribute('alt', lang === 'en' ? el.dataset.enAlt : el.dataset.bgAlt);
     });
 
     if (pageTitle) {
